@@ -3,429 +3,912 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>VETT | Verify Before You Pay</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+<title>Vett — Verify Before You Pay | usevett.com</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
 <style>
-
-:root{
---gold:#d4a11e;
---dark:#0b0b12;
---card:#161622;
---border:#2c2c3a;
-}
-
+:root{--dark:#0a0a12;--navy:#12121f;--card:#16162a;--gold:#c49a1a;--gold-lt:#e0b83a;--gold-dim:#7a5e0a;--white:#f5f0e8;--grey:#6a6a8a;--mid:#3a3a5a;--green:#27ae60;--red:#c0392b;}
 *{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--white);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;}
 
-body{
-font-family:Inter;
-background:#0b0b12;
-color:white;
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 40px;background:rgba(10,10,18,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(196,154,26,0.12);}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:4px;color:var(--gold);text-decoration:none;}
+.nav-links{display:flex;align-items:center;gap:24px;list-style:none;}
+.nav-links a{color:var(--grey);text-decoration:none;font-size:13px;font-weight:500;transition:color 0.2s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-cta{background:var(--gold)!important;color:var(--dark)!important;padding:9px 20px;border-radius:2px;font-weight:700!important;}
+.nav-cta:hover{background:var(--gold-lt)!important;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--gold);transition:all 0.3s;}
+.mob-nav{display:none;position:fixed;top:58px;left:0;right:0;background:var(--navy);border-bottom:1px solid var(--mid);padding:16px 24px;z-index:99;flex-direction:column;gap:0;}
+.mob-nav.open{display:flex;}
+.mob-nav a{color:var(--white);text-decoration:none;font-size:15px;padding:12px 0;border-bottom:1px solid rgba(58,58,90,0.35);transition:color 0.2s;}
+.mob-nav a:last-child{border-bottom:none;color:var(--gold);font-weight:700;margin-top:4px;}
 
-background-image:
-linear-gradient(rgba(212,161,30,0.05) 1px, transparent 1px),
-linear-gradient(90deg, rgba(212,161,30,0.05) 1px, transparent 1px);
-background-size:60px 60px;
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:120px 40px 80px;overflow:hidden;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(196,154,26,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(196,154,26,0.04) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+.hero-glow{position:absolute;top:-150px;right:-150px;width:600px;height:600px;background:radial-gradient(circle,rgba(196,154,26,0.07) 0%,transparent 70%);pointer-events:none;}
+.hero-content{position:relative;z-index:1;max-width:700px;}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.eyebrow::before{content:'';width:24px;height:2px;background:var(--gold);display:block;flex-shrink:0;}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(64px,11vw,124px);line-height:0.88;letter-spacing:2px;margin-bottom:10px;}
+.hero-title span{color:var(--gold);}
+.hero-cat{font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,3vw,40px);letter-spacing:2px;color:var(--grey);margin-bottom:24px;}
+.hero-desc{font-size:17px;color:rgba(245,240,232,0.72);max-width:480px;margin-bottom:36px;font-weight:300;line-height:1.7;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.hero-stats{position:absolute;right:40px;bottom:80px;display:flex;flex-direction:column;gap:18px;z-index:1;text-align:right;}
+.hstat-num{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--gold);letter-spacing:2px;line-height:1;}
+.hstat-lbl{font-size:11px;color:var(--grey);text-transform:uppercase;letter-spacing:1px;}
+.hstat-line{width:32px;height:1px;background:var(--mid);margin-left:auto;margin-top:18px;}
+
+/* BUTTONS */
+.btn{display:inline-block;padding:13px 30px;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all 0.2s;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;}
+.btn-gold{background:var(--gold);color:var(--dark);}
+.btn-gold:hover{background:var(--gold-lt);transform:translateY(-2px);}
+.btn-out{border:1.5px solid rgba(196,154,26,0.4);color:var(--gold);background:transparent;}
+.btn-out:hover{border-color:var(--gold);background:rgba(196,154,26,0.08);}
+
+/* TICKER */
+.ticker{background:var(--gold);padding:12px 0;overflow:hidden;white-space:nowrap;}
+.ticker-inner{display:inline-flex;animation:tick 24s linear infinite;}
+.ti{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:3px;color:var(--dark);padding:0 32px;}
+.td{color:rgba(10,10,18,0.35);}
+@keyframes tick{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* SECTIONS */
+.sec{position:relative;z-index:1;padding:80px 40px;}
+.sec-dark{background:var(--dark);}
+.sec-navy{background:var(--navy);}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5.5vw,64px);letter-spacing:2px;line-height:1;margin-bottom:14px;}
+.sec-sub{font-size:15px;color:var(--grey);max-width:500px;line-height:1.7;font-weight:300;margin-bottom:0;}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--mid);border-radius:2px;transition:all 0.25s;}
+.card:hover{border-color:var(--gold-dim);transform:translateY(-5px);box-shadow:0 14px 44px rgba(196,154,26,0.13);}
+
+/* PROBLEM */
+.prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:44px;}
+.prob-card{background:var(--card);padding:32px 26px;border-top:3px solid var(--gold-dim);transition:all 0.25s;}
+.prob-card:hover{border-top-color:var(--gold);transform:translateY(-5px);box-shadow:0 14px 44px rgba(196,154,26,0.13);}
+.prob-icon{font-size:32px;margin-bottom:14px;display:block;}
+.prob-title{font-family:'Bebas Neue',sans-serif;font-size:23px;letter-spacing:1px;margin-bottom:10px;}
+.prob-body{font-size:13px;color:var(--grey);line-height:1.7;}
+.prob-stat{margin-top:18px;font-family:'Bebas Neue',sans-serif;font-size:30px;color:var(--gold);letter-spacing:2px;}
+.prob-stat-lbl{font-size:11px;color:var(--grey);text-transform:uppercase;letter-spacing:1px;}
+
+/* HOW IT WORKS */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--mid);margin-top:44px;}
+.step{padding:30px 22px;border-right:1px solid var(--mid);position:relative;transition:background 0.25s;}
+.step:last-child{border-right:none;}
+.step:hover{background:rgba(196,154,26,0.05);}
+.step-bar{position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform 0.35s;}
+.step:hover .step-bar{transform:scaleX(1);}
+.step-num{font-family:'Bebas Neue',sans-serif;font-size:52px;color:rgba(196,154,26,0.1);line-height:1;margin-bottom:14px;}
+.step-title{font-size:14px;font-weight:700;color:var(--white);margin-bottom:8px;}
+.step-body{font-size:12.5px;color:var(--grey);line-height:1.7;}
+
+/* TRUST BAR */
+.trust-bar{display:flex;align-items:flex-start;gap:14px;background:rgba(196,154,26,0.06);border:1px solid rgba(196,154,26,0.2);padding:18px 22px;border-radius:2px;margin-top:20px;}
+.trust-bar-icon{font-size:20px;flex-shrink:0;margin-top:1px;}
+.trust-bar-txt{font-size:13px;color:var(--grey);line-height:1.55;}
+.trust-bar-txt strong{color:var(--gold);}
+
+/* SERVICES */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px;}
+.svc-card{background:var(--card);border:1px solid var(--mid);overflow:hidden;transition:all 0.25s;display:flex;flex-direction:column;}
+.svc-card:hover{border-color:var(--gold-dim);transform:translateY(-5px);box-shadow:0 14px 44px rgba(196,154,26,0.13);}
+.svc-card.dim{opacity:0.5;pointer-events:none;}
+.svc-head{padding:26px 22px 18px;border-bottom:1px solid var(--mid);}
+.svc-icon{font-size:34px;margin-bottom:12px;display:block;}
+.svc-name{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;margin-bottom:4px;}
+.svc-tag{font-size:12px;color:var(--gold);font-weight:500;}
+.svc-body{padding:18px 22px;flex:1;}
+.svc-desc{font-size:13px;color:var(--grey);line-height:1.7;margin-bottom:14px;}
+.cs-badge{display:inline-block;background:var(--mid);color:var(--grey);font-size:10px;font-weight:700;letter-spacing:2px;padding:4px 10px;border-radius:2px;}
+.svc-link{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);text-decoration:none;}
+.svc-link:hover{text-decoration:underline;}
+.svc-wide{grid-column:2/4;background:linear-gradient(135deg,#12121f 0%,#1a1a08 100%);border-color:rgba(196,154,26,0.2);}
+.svc-wide .svc-body{padding:36px;}
+
+/* NRI */
+.nri-sec{background:linear-gradient(135deg,#0d0d1a 0%,#1a1a08 100%);border-top:1px solid rgba(196,154,26,0.2);border-bottom:1px solid rgba(196,154,26,0.2);}
+.nri-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+.nri-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,5vw,56px);letter-spacing:2px;line-height:1.05;margin-bottom:16px;}
+.nri-title span{color:var(--gold);}
+.nri-body{font-size:15px;color:var(--grey);line-height:1.7;font-weight:300;margin-bottom:28px;}
+.nri-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.nri-stat{background:rgba(196,154,26,0.06);border:1px solid rgba(196,154,26,0.15);padding:20px;transition:all 0.25s;}
+.nri-stat:hover{border-color:rgba(196,154,26,0.35);background:rgba(196,154,26,0.09);}
+.nri-num{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--gold);letter-spacing:2px;line-height:1;margin-bottom:4px;}
+.nri-lbl{font-size:12px;color:var(--grey);line-height:1.4;}
+
+/* WHY VETT */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-top:44px;align-items:start;}
+.why-pts{display:flex;flex-direction:column;gap:26px;}
+.why-pt{display:flex;gap:16px;}
+.why-num{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--gold-dim);line-height:1;flex-shrink:0;width:42px;}
+.why-title{font-size:14px;font-weight:700;color:var(--white);margin-bottom:5px;}
+.why-body{font-size:13px;color:var(--grey);line-height:1.7;}
+.cmp-table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--mid);}
+.cmp-table th{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--grey);padding:12px 14px;text-align:center;border-bottom:1px solid var(--mid);}
+.cmp-table th:first-child{text-align:left;}
+.cmp-table th:last-child{color:var(--gold);}
+.cmp-table td{padding:11px 14px;font-size:13px;color:var(--grey);border-bottom:1px solid rgba(58,58,90,0.4);text-align:center;}
+.cmp-table td:first-child{text-align:left;color:var(--white);font-weight:500;}
+.cmp-table td:last-child{color:var(--gold);font-weight:700;}
+.yes{color:#4abd6a;font-size:15px;}
+.no{color:var(--red);font-size:15px;}
+
+/* PRICING */
+.ptabs{display:flex;gap:8px;margin-top:36px;margin-bottom:24px;flex-wrap:wrap;}
+.ptab{padding:10px 22px;font-size:13px;font-weight:700;border:1.5px solid var(--mid);background:transparent;color:var(--grey);cursor:pointer;border-radius:2px;transition:all 0.2s;font-family:'DM Sans',sans-serif;}
+.ptab:hover{border-color:var(--gold-dim);color:var(--white);}
+.ptab.active{background:var(--gold);border-color:var(--gold);color:var(--dark);}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.price-card{background:var(--card);padding:28px 24px;position:relative;transition:all 0.25s;border:1px solid transparent;}
+.price-card:hover{border-color:var(--gold-dim);transform:translateY(-4px);box-shadow:0 14px 44px rgba(196,154,26,0.12);}
+.price-card.feat{background:#1a1a2e;border:1px solid var(--gold);}
+.price-card.feat::before{content:'MOST POPULAR';position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--dark);font-size:10px;font-weight:700;letter-spacing:2px;padding:3px 12px;white-space:nowrap;}
+.price-tier{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--grey);margin-bottom:10px;}
+.price-amt{font-family:'Bebas Neue',sans-serif;font-size:42px;color:var(--white);letter-spacing:2px;line-height:1;margin-bottom:4px;}
+.price-card.feat .price-amt{color:var(--gold-lt);}
+.price-badge{font-size:11px;color:var(--gold);padding:4px 8px;background:rgba(196,154,26,0.08);border:1px solid rgba(196,154,26,0.2);border-radius:2px;display:inline-block;margin-bottom:12px;}
+.price-desc{font-size:13px;color:var(--grey);margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--mid);line-height:1.6;}
+.price-feats{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:22px;}
+.price-feats li{font-size:13px;color:var(--grey);display:flex;align-items:flex-start;gap:7px;line-height:1.4;}
+.price-feats li span{color:var(--gold);font-size:11px;margin-top:2px;flex-shrink:0;}
+.price-btn{display:block;text-align:center;padding:11px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all 0.2s;}
+.price-btn-out{border:1px solid var(--mid);color:var(--grey);}
+.price-btn-out:hover{border-color:var(--gold);color:var(--gold);}
+.price-btn-gold{background:var(--gold);color:var(--dark);}
+.price-btn-gold:hover{background:var(--gold-lt);}
+.addon-bar{margin-top:18px;background:var(--card);border:1px solid rgba(196,154,26,0.25);padding:22px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;transition:all 0.25s;}
+.addon-bar:hover{border-color:var(--gold-dim);box-shadow:0 8px 30px rgba(196,154,26,0.1);}
+.addon-title{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:2px;color:var(--gold);margin-bottom:3px;}
+.addon-desc{font-size:13px;color:var(--grey);}
+.tl-note{margin-top:14px;padding:14px 20px;background:rgba(196,154,26,0.04);border-left:3px solid var(--gold-dim);display:flex;gap:10px;font-size:13px;color:var(--grey);line-height:1.6;}
+.tl-note strong{color:var(--white);}
+
+/* CHECKLIST SECTION */
+.chk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px;}
+.chk-card{background:var(--card);border:1px solid var(--mid);padding:24px;transition:all 0.25s;}
+.chk-card:hover{border-color:var(--gold-dim);transform:translateY(-4px);box-shadow:0 10px 36px rgba(196,154,26,0.1);}
+.chk-card h4{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;color:var(--white);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.chk-list{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.chk-list li{font-size:12.5px;color:var(--grey);display:flex;align-items:flex-start;gap:7px;line-height:1.5;}
+.chk-list li::before{content:'✓';color:var(--gold);font-size:11px;margin-top:2px;flex-shrink:0;}
+
+/* PARTNERS PAGE */
+.partner-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:44px;}
+.partner-card{background:var(--card);border:1px solid var(--mid);padding:32px;transition:all 0.25s;position:relative;overflow:hidden;}
+.partner-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold-dim);transition:background 0.25s;}
+.partner-card:hover{border-color:var(--gold-dim);transform:translateY(-5px);box-shadow:0 14px 44px rgba(196,154,26,0.13);}
+.partner-card:hover::before{background:var(--gold);}
+.partner-icon{font-size:36px;margin-bottom:14px;}
+.partner-name{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;margin-bottom:6px;}
+.partner-tag{font-size:12px;color:var(--gold);font-weight:500;margin-bottom:12px;}
+.partner-desc{font-size:13px;color:var(--grey);line-height:1.7;margin-bottom:16px;}
+.partner-perks{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.partner-perks li{font-size:13px;color:var(--grey);display:flex;align-items:flex-start;gap:7px;line-height:1.4;}
+.partner-perks li::before{content:'→';color:var(--gold);font-size:12px;flex-shrink:0;margin-top:1px;}
+
+/* FAQ */
+.faq-list{max-width:760px;display:flex;flex-direction:column;gap:2px;margin-top:44px;}
+.faq-item{background:var(--card);border-left:3px solid var(--gold-dim);transition:border-color 0.2s;}
+.faq-item.open{border-left-color:var(--gold);}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:18px 22px;background:transparent;border:none;cursor:pointer;text-align:left;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;color:var(--white);transition:color 0.2s;}
+.faq-q:hover,.faq-item.open .faq-q{color:var(--gold);}
+.faq-icon{font-size:22px;color:var(--gold);flex-shrink:0;transition:transform 0.3s;font-weight:300;line-height:1;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+.faq-a{display:none;padding:0 22px 18px;flex-direction:column;gap:10px;}
+.faq-a p{font-size:13.5px;color:var(--grey);line-height:1.75;}
+.faq-a p strong{color:var(--white);}
+.faq-item.open .faq-a{display:flex;}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:44px;}
+.contact-item{display:flex;align-items:flex-start;gap:14px;}
+.contact-icon{font-size:24px;flex-shrink:0;margin-top:2px;}
+.contact-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--grey);margin-bottom:4px;}
+.contact-val{font-size:16px;color:var(--white);}
+.contact-val a{color:var(--gold);text-decoration:none;}
+.contact-val a:hover{text-decoration:underline;}
+.expand-note{display:inline-flex;align-items:center;gap:8px;margin-top:24px;padding:12px 20px;background:rgba(196,154,26,0.06);border:1px solid rgba(196,154,26,0.2);border-radius:2px;font-size:13px;color:var(--gold);}
+
+/* CTA */
+.cta-sec{text-align:center;padding:100px 40px;position:relative;overflow:hidden;}
+.cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:320px;background:radial-gradient(ellipse,rgba(196,154,26,0.07) 0%,transparent 70%);pointer-events:none;}
+.cta-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,7vw,86px);letter-spacing:3px;line-height:1;margin-bottom:14px;position:relative;z-index:1;}
+.cta-title span{color:var(--gold);}
+.cta-sub{font-size:16px;color:var(--grey);margin-bottom:36px;position:relative;z-index:1;}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;}
+.cta-contacts{display:flex;justify-content:center;gap:28px;margin-top:22px;flex-wrap:wrap;position:relative;z-index:1;}
+.cta-contact{font-size:13px;color:var(--grey);display:flex;align-items:center;gap:7px;}
+.cta-contact a{color:var(--gold);text-decoration:none;}
+
+/* COMING + DISCLAIMER + FOOTER */
+.coming-strip{background:var(--navy);border-top:1px solid var(--mid);padding:14px 40px;display:flex;align-items:center;gap:16px;font-size:12px;color:var(--grey);flex-wrap:wrap;}
+.cs-lbl{font-size:10px;font-weight:700;letter-spacing:3px;color:var(--gold);background:rgba(196,154,26,0.1);border:1px solid rgba(196,154,26,0.25);padding:3px 10px;border-radius:2px;flex-shrink:0;}
+.cs-dot{color:var(--gold-dim);font-size:8px;}
+.disclaimer{background:#0d0d16;border-top:1px solid var(--mid);padding:18px 40px;}
+.disclaimer p{font-size:11px;color:var(--mid);line-height:1.7;max-width:940px;}
+.disclaimer p strong{color:var(--grey);}
+footer{background:var(--navy);border-top:1px solid var(--mid);padding:40px;}
+.ft-inner{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;flex-wrap:wrap;}
+.ft-logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:4px;color:var(--gold);text-decoration:none;display:block;}
+.ft-tag{font-size:12px;color:var(--grey);margin-top:4px;}
+.ft-col h4{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--grey);margin-bottom:12px;}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.ft-col a{font-size:13px;color:var(--grey);text-decoration:none;transition:color 0.2s;}
+.ft-col a:hover{color:var(--gold);}
+.ft-bottom{margin-top:32px;padding-top:18px;border-top:1px solid var(--mid);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.ft-copy{font-size:12px;color:var(--mid);}
+.ft-domain{font-size:12px;color:var(--gold-dim);}
+
+/* PAGE SECTIONS (property + partners) */
+.page-section{display:none;}
+.page-section.active{display:block;}
+.page-hero-inner{padding-top:120px;padding-bottom:56px;}
+.tab-btns{display:flex;gap:4px;margin-top:24px;flex-wrap:wrap;}
+.tab-btn{padding:10px 22px;font-size:13px;font-weight:600;border:1.5px solid var(--mid);background:transparent;color:var(--grey);cursor:pointer;border-radius:2px;transition:all 0.2s;font-family:'DM Sans',sans-serif;}
+.tab-btn:hover,.tab-btn.active{border-color:var(--gold);color:var(--gold);background:rgba(196,154,26,0.06);}
+.what-you-get{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:32px;}
+.wyg{background:var(--card);border:1px solid var(--mid);padding:22px;text-align:center;transition:all 0.25s;}
+.wyg:hover{border-color:var(--gold-dim);transform:translateY(-4px);box-shadow:0 10px 36px rgba(196,154,26,0.1);}
+.wyg-icon{font-size:28px;margin-bottom:10px;}
+.wyg-title{font-size:14px;font-weight:700;color:var(--white);margin-bottom:5px;}
+.wyg-body{font-size:12px;color:var(--grey);line-height:1.6;}
+
+/* FORM */
+.partner-form{max-width:600px;margin-top:36px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.form-grp{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
+.form-grp label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--grey);}
+.form-grp input,.form-grp select,.form-grp textarea{background:var(--card);border:1px solid var(--mid);color:var(--white);padding:11px 14px;font-size:14px;font-family:'DM Sans',sans-serif;border-radius:2px;outline:none;transition:border-color 0.2s;width:100%;}
+.form-grp input:focus,.form-grp select:focus,.form-grp textarea:focus{border-color:var(--gold);}
+.form-grp select option{background:var(--card);}
+.form-grp textarea{resize:vertical;min-height:90px;}
+.form-note{font-size:12px;color:var(--grey);margin-top:8px;line-height:1.5;}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+.a1{animation:fadeUp 0.6s ease both;}
+.a2{animation:fadeUp 0.7s 0.1s ease both;}
+.a3{animation:fadeUp 0.7s 0.2s ease both;}
+.a4{animation:fadeUp 0.7s 0.3s ease both;}
+.a5{animation:fadeUp 0.7s 0.4s ease both;}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:14px 20px;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .hero{padding:110px 20px 64px;}
+  .hero-stats{display:none;}
+  .sec{padding:60px 20px;}
+  .prob-grid,.svc-grid,.steps,.chk-grid,.why-grid,.nri-inner,.contact-grid,.what-you-get,.ft-inner,.partner-grid{grid-template-columns:1fr;gap:16px;}
+  .steps{border:none;}
+  .step{border-right:none;border-bottom:1px solid var(--mid);}
+  .step:last-child{border-bottom:none;}
+  .price-grid{grid-template-columns:1fr;}
+  .svc-wide{grid-column:1;}
+  .ft-inner{grid-template-columns:1fr 1fr;}
+  .ft-bottom{flex-direction:column;text-align:center;}
+  .coming-strip{padding:12px 20px;}
+  .disclaimer{padding:14px 20px;}
+  footer{padding:32px 20px;}
+  .nri-stats{display:grid;grid-template-columns:1fr 1fr;}
+  .cta-sec{padding:72px 20px;}
+  .why-grid{gap:32px;}
+  .form-row{grid-template-columns:1fr;}
 }
-
-.container{
-width:90%;
-max-width:1150px;
-margin:auto;
+@media(max-width:480px){
+  .hero-title{font-size:clamp(54px,16vw,90px);}
+  .ptabs{gap:6px;}
+  .ptab{padding:8px 14px;font-size:12px;}
+  .nri-stats{grid-template-columns:1fr 1fr;}
+  .ft-inner{grid-template-columns:1fr;}
 }
-
-nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:28px 0;
-}
-
-.logo{
-font-family:"Bebas Neue";
-font-size:34px;
-letter-spacing:4px;
-color:var(--gold);
-}
-
-nav a{
-color:#bbb;
-text-decoration:none;
-margin-left:26px;
-font-size:14px;
-}
-
-nav a:hover{color:var(--gold);}
-
-.hero{
-padding:120px 0 80px;
-position:relative;
-}
-
-.hero-glow{
-position:absolute;
-width:600px;
-height:600px;
-background:radial-gradient(circle, rgba(212,161,30,0.15) 0%, transparent 70%);
-top:-200px;
-right:-200px;
-pointer-events:none;
-}
-
-.hero h1{
-font-family:"Bebas Neue";
-font-size:100px;
-line-height:0.9;
-letter-spacing:2px;
-}
-
-.gold{color:var(--gold);}
-
-.hero p{
-margin-top:20px;
-max-width:500px;
-color:#aaa;
-font-size:18px;
-}
-
-.btn{
-display:inline-block;
-margin-top:35px;
-padding:16px 36px;
-background:var(--gold);
-color:black;
-font-weight:600;
-text-decoration:none;
-}
-
-.section{
-padding:90px 0;
-}
-
-.section h2{
-font-family:"Bebas Neue";
-font-size:64px;
-letter-spacing:2px;
-margin-bottom:15px;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:30px;
-margin-top:40px;
-}
-
-.card{
-background:var(--card);
-padding:32px;
-border:1px solid var(--border);
-transition:.3s;
-}
-
-.card:hover{
-transform:translateY(-6px);
-border-color:var(--gold);
-box-shadow:0 15px 40px rgba(212,161,30,0.15);
-}
-
-.card h3{
-font-family:"Bebas Neue";
-font-size:30px;
-letter-spacing:1px;
-}
-
-.card p{
-margin-top:10px;
-color:#aaa;
-font-size:14px;
-}
-
-.ticker{
-background:var(--gold);
-color:black;
-padding:12px 0;
-overflow:hidden;
-white-space:nowrap;
-}
-
-.ticker-track{
-display:inline-block;
-animation:scroll 20s linear infinite;
-}
-
-.ticker span{
-font-family:"Bebas Neue";
-letter-spacing:3px;
-margin:0 40px;
-}
-
-@keyframes scroll{
-0%{transform:translateX(0)}
-100%{transform:translateX(-50%)}
-}
-
-.steps{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:25px;
-margin-top:40px;
-}
-
-.step{
-background:#141420;
-padding:25px;
-border-left:3px solid var(--gold);
-}
-
-.step h4{margin-bottom:8px;}
-
-table{
-width:100%;
-margin-top:40px;
-border-collapse:collapse;
-}
-
-th,td{
-border-bottom:1px solid #2c2c3a;
-padding:15px;
-text-align:center;
-}
-
-th:first-child,td:first-child{text-align:left;}
-
-.check{color:#4bd37b;font-weight:bold;}
-.cross{color:#ff6a6a;}
-
-footer{
-border-top:1px solid #2c2c3a;
-padding:40px 0;
-text-align:center;
-margin-top:80px;
-color:#777;
-}
-
-@media(max-width:768px){
-
-.hero h1{font-size:64px;}
-.section h2{font-size:44px;}
-
-}
-
 </style>
 </head>
-
 <body>
 
-<div class="container">
-
+<!-- NAV -->
 <nav>
-<div class="logo">VETT</div>
-<div>
-<a href="#services">Services</a>
-<a href="#how">How It Works</a>
-<a href="#partners">Partner</a>
-<a href="#contact">Contact</a>
-</div>
+  <a class="logo" href="#home" onclick="showPage('home')">VETT</a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home');scrollTo('services')">Services</a></li>
+    <li><a href="#" onclick="showPage('home');scrollTo('how')">How It Works</a></li>
+    <li><a href="#" onclick="showPage('home');scrollTo('pricing')">Pricing</a></li>
+    <li><a href="#" onclick="showPage('home');scrollTo('faq')">FAQ</a></li>
+    <li><a href="#" onclick="showPage('home');scrollTo('nri')">For NRIs</a></li>
+    <li><a href="#" onclick="showPage('property')">Property</a></li>
+    <li><a href="#" onclick="showPage('partners')">Partner With Us</a></li>
+    <li><a href="https://wa.me/918089614716" target="_blank" class="nav-cta">Get Verified</a></li>
+  </ul>
+  <button class="hamburger" id="hbg" onclick="toggleMob()"><span></span><span></span><span></span></button>
 </nav>
+<div class="mob-nav" id="mobnav">
+  <a href="#" onclick="showPage('home');toggleMob()">Home</a>
+  <a href="#" onclick="showPage('property');toggleMob()">Property Verification</a>
+  <a href="#" onclick="showPage('home');scrollTo('pricing');toggleMob()">Pricing</a>
+  <a href="#" onclick="showPage('home');scrollTo('faq');toggleMob()">FAQ</a>
+  <a href="#" onclick="showPage('home');scrollTo('nri');toggleMob()">For NRIs</a>
+  <a href="#" onclick="showPage('partners');toggleMob()">Partner With Us</a>
+  <a href="https://wa.me/918089614716" target="_blank">WhatsApp Us →</a>
+</div>
 
+<!-- ═══════════════════════════════════════ HOME PAGE ═══════════════════════════════════════ -->
+<div id="pg-home" class="page-section active">
+
+<!-- HERO -->
 <section class="hero">
-
-<div class="hero-glow"></div>
-
-<h1>
-VERIFY<br>
-<span class="gold">BEFORE</span><br>
-YOU PAY
-</h1>
-
-<p>
-Independent verification platform for property and vehicles across India.
-Know the truth before committing to a high-value purchase.
-</p>
-
-<a class="btn" href="https://wa.me/918089614716">Request Verification</a>
-
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="eyebrow a1">Neutral Verification Platform</div>
+    <h1 class="hero-title a2">VERIFY<br><span>BEFORE</span><br>YOU PAY.</h1>
+    <p class="hero-cat a3">Property · Vehicles · Gadgets</p>
+    <p class="hero-desc a4">Brokers are paid to close. Marketplaces are paid for volume. Nobody was paid purely for truth — until now.</p>
+    <div class="hero-btns a5">
+      <a href="https://wa.me/918089614716" target="_blank" class="btn btn-gold">WhatsApp Us</a>
+      <a href="#" onclick="scrollTo('how')" class="btn btn-out">How It Works</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div><div class="hstat-num">₹15,000 Cr</div><div class="hstat-lbl">Lost to property fraud yearly</div></div>
+    <div class="hstat-line"></div>
+    <div><div class="hstat-num">3 Cr+</div><div class="hstat-lbl">Used gadgets sold monthly</div></div>
+    <div class="hstat-line"></div>
+    <div><div class="hstat-num">Zero</div><div class="hstat-lbl">Neutral verifiers before Vett</div></div>
+  </div>
 </section>
 
-</div>
+<!-- TICKER -->
+<div class="ticker"><div class="ticker-inner">
+  <span class="ti">PROPERTY VERIFICATION <span class="td">◆</span></span>
+  <span class="ti">INDEPENDENT INSPECTION <span class="td">◆</span></span>
+  <span class="ti">LEGAL REVIEW <span class="td">◆</span></span>
+  <span class="ti">USED VEHICLES <span class="td">◆</span> COMING SOON</span>
+  <span class="ti">GADGETS <span class="td">◆</span> COMING SOON</span>
+  <span class="ti">NEUTRAL <span class="td">◆</span></span>
+  <span class="ti">PROOF-BASED <span class="td">◆</span></span>
+  <span class="ti">VERIFY BEFORE YOU PAY <span class="td">◆</span></span>
+  <span class="ti">PROPERTY VERIFICATION <span class="td">◆</span></span>
+  <span class="ti">INDEPENDENT INSPECTION <span class="td">◆</span></span>
+  <span class="ti">LEGAL REVIEW <span class="td">◆</span></span>
+  <span class="ti">USED VEHICLES <span class="td">◆</span> COMING SOON</span>
+  <span class="ti">GADGETS <span class="td">◆</span> COMING SOON</span>
+  <span class="ti">NEUTRAL <span class="td">◆</span></span>
+  <span class="ti">PROOF-BASED <span class="td">◆</span></span>
+  <span class="ti">VERIFY BEFORE YOU PAY <span class="td">◆</span></span>
+</div></div>
 
-
-<div class="ticker">
-<div class="ticker-track">
-<span>PROPERTY VERIFICATION</span>
-<span>INDEPENDENT EXPERTS</span>
-<span>VERIFY BEFORE YOU PAY</span>
-<span>USED VEHICLE CHECKS</span>
-<span>TRUSTED REPORTS</span>
-
-<span>PROPERTY VERIFICATION</span>
-<span>INDEPENDENT EXPERTS</span>
-<span>VERIFY BEFORE YOU PAY</span>
-<span>USED VEHICLE CHECKS</span>
-<span>TRUSTED REPORTS</span>
-</div>
-</div>
-
-
-<section class="section" id="services">
-
-<div class="container">
-
-<h2>WHAT WE VERIFY</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>Property Verification</h3>
-<p>
-Apartments, independent houses, land and under-construction homes verified through structural inspection and legal document review.
-</p>
-</div>
-
-<div class="card">
-<h3>Vehicle Verification</h3>
-<p>
-Independent used vehicle inspection covering engine condition, accident history and ownership verification. Launching soon in select cities.
-</p>
-</div>
-
-</div>
-
-</div>
-
+<!-- PROBLEM -->
+<section class="sec sec-dark" id="problem">
+  <div class="eyebrow">The Problem</div>
+  <h2 class="sec-title">THE TRUST GAP IS<br>COSTING BUYERS.</h2>
+  <p class="sec-sub">Every high-value transaction has the same flaw — the seller controls all the information.</p>
+  <div class="prob-grid">
+    <div class="prob-card">
+      <span class="prob-icon">🏠</span>
+      <div class="prob-title">Property Fraud</div>
+      <div class="prob-body">Title disputes. Missing approvals. Hidden encroachments. Buyers pay lakhs without any independent check on documents or physical condition.</div>
+      <div class="prob-stat">₹15,000 Cr</div>
+      <div class="prob-stat-lbl">Lost annually in India</div>
+    </div>
+    <div class="prob-card">
+      <span class="prob-icon">🚗</span>
+      <div class="prob-title">Vehicle Deception</div>
+      <div class="prob-body">Tampered odometers. Hidden accident history. Engine issues masked before sale. The used vehicle market runs on information asymmetry.</div>
+      <div class="prob-stat" style="font-size:20px;">Launching Soon</div>
+      <div class="prob-stat-lbl">Vehicle verification</div>
+    </div>
+    <div class="prob-card">
+      <span class="prob-icon">📱</span>
+      <div class="prob-title">Gadget Deception</div>
+      <div class="prob-body">40% battery health. Cracked inner screen. iCloud locked. Millions of used devices sold on OLX daily with zero neutral check.</div>
+      <div class="prob-stat">3 Cr+</div>
+      <div class="prob-stat-lbl">Used gadgets sold monthly</div>
+    </div>
+  </div>
 </section>
 
-
-<section class="section" id="how">
-
-<div class="container">
-
-<h2>HOW VETT WORKS</h2>
-
-<div class="steps">
-
-<div class="step">
-<h4>1 Request Verification</h4>
-<p>Share property or vehicle details with Vett.</p>
-</div>
-
-<div class="step">
-<h4>2 Expert Assigned</h4>
-<p>An independent professional is assigned.</p>
-</div>
-
-<div class="step">
-<h4>3 Inspection</h4>
-<p>On-site inspection and document review.</p>
-</div>
-
-<div class="step">
-<h4>4 Verified Report</h4>
-<p>Receive a clear report before making a decision.</p>
-</div>
-
-</div>
-
-</div>
-
+<!-- HOW IT WORKS -->
+<section class="sec sec-navy" id="how">
+  <div class="eyebrow">How It Works</div>
+  <h2 class="sec-title">SIMPLE. FAST.<br>TRANSPARENT.</h2>
+  <p class="sec-sub">One process across all categories. You request — we coordinate — you decide.</p>
+  <div class="steps">
+    <div class="step"><div class="step-bar"></div><div class="step-num">01</div><div class="step-title">You Request</div><div class="step-body">Share what you want verified. Choose your plan. Pay online. Under 2 minutes.</div></div>
+    <div class="step"><div class="step-bar"></div><div class="step-num">02</div><div class="step-title">We Assign an Expert</div><div class="step-body">Vett connects you with a trained professional from our verified network — structural, legal, mechanical, or technical. You manage nothing.</div></div>
+    <div class="step"><div class="step-bar"></div><div class="step-num">03</div><div class="step-title">On-Site Verification</div><div class="step-body">Expert inspects on-site using a standardised checklist. Every finding is photographed and timestamped. All reports are cross-checked internally before delivery.</div></div>
+    <div class="step"><div class="step-bar"></div><div class="step-num">04</div><div class="step-title">You Get the Truth</div><div class="step-body">One clear report — physical findings, legal review, photo evidence, and plain-language verdict: LOW / MODERATE / HIGH risk.</div></div>
+  </div>
+  <div class="trust-bar">
+    <div class="trust-bar-icon">🔒</div>
+    <div class="trust-bar-txt"><strong>Anti-Bribery Guarantee:</strong> Every inspection is independently cross-verified by our internal review team before the report is released. No single inspector can alter a finding — the system catches it.</div>
+  </div>
 </section>
 
-
-<section class="section">
-
-<div class="container">
-
-<h2>WHY VETT</h2>
-
-<table>
-
-<tr>
-<th>Feature</th>
-<th>Broker</th>
-<th>Portal</th>
-<th>VETT</th>
-</tr>
-
-<tr>
-<td>Independent inspection</td>
-<td class="cross">✕</td>
-<td class="cross">✕</td>
-<td class="check">✓</td>
-</tr>
-
-<tr>
-<td>Paid for truth</td>
-<td class="cross">✕</td>
-<td class="cross">✕</td>
-<td class="check">✓</td>
-</tr>
-
-<tr>
-<td>Evidence report</td>
-<td class="cross">✕</td>
-<td class="cross">✕</td>
-<td class="check">✓</td>
-</tr>
-
-<tr>
-<td>No conflict of interest</td>
-<td class="cross">✕</td>
-<td class="cross">✕</td>
-<td class="check">✓</td>
-</tr>
-
-</table>
-
-</div>
-
+<!-- SERVICES -->
+<section class="sec sec-dark" id="services">
+  <div class="eyebrow">Our Services</div>
+  <h2 class="sec-title">WHAT WE VERIFY.</h2>
+  <p class="sec-sub">Starting with property. Expanding to every high-value purchase.</p>
+  <div class="svc-grid">
+    <div class="svc-card">
+      <div class="svc-head"><span class="svc-icon">🏠</span><div class="svc-name">RESIDENTIAL</div><div class="svc-tag">Apartments · Houses · Villas</div></div>
+      <div class="svc-body"><p class="svc-desc">Full structural inspection and independent legal review. Know exactly what you're buying before you sign.</p><a href="#" onclick="showPage('property')" class="svc-link">View Details →</a></div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-head"><span class="svc-icon">🌿</span><div class="svc-name">LAND & PLOT</div><div class="svc-tag">Residential · Agricultural · Commercial</div></div>
+      <div class="svc-body"><p class="svc-desc">Boundary walk, access road check, physical condition and full legal title verification. Critical for remote buyers.</p><a href="#" onclick="showPage('property');scrollTo('land-sec')" class="svc-link">View Details →</a></div>
+    </div>
+    <div class="svc-card dim">
+      <div class="svc-head"><span class="svc-icon">🚗</span><div class="svc-name">USED VEHICLES</div><div class="svc-tag">Cars · Bikes · Commercial</div></div>
+      <div class="svc-body"><p class="svc-desc">Mechanical condition, accident history, ownership documents — independently checked before you pay.</p><span class="cs-badge">Coming Soon</span></div>
+    </div>
+    <div class="svc-card dim" style="grid-column:1">
+      <div class="svc-head"><span class="svc-icon">📱</span><div class="svc-name">GADGETS</div><div class="svc-tag">Phones · Laptops · Electronics</div></div>
+      <div class="svc-body"><p class="svc-desc">Battery health, screen, IMEI, water damage — everything checked before you pay on OLX or Marketplace.</p><span class="cs-badge">Coming Soon</span></div>
+    </div>
+    <div class="svc-card svc-wide">
+      <div class="svc-body"><div class="eyebrow" style="margin-bottom:10px;">The Vision</div><h3 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(26px,3vw,36px);letter-spacing:2px;line-height:1.1;margin-bottom:10px;">ONE TRUST BRAND.<br><span style="color:var(--gold);">EVERY HIGH-VALUE PURCHASE.</span></h3><p style="font-size:13px;color:var(--grey);line-height:1.7;max-width:400px;">Property today. Vehicles and gadgets next. Any purchase where a buyer needs a neutral party to tell the truth — that's Vett.</p></div>
+    </div>
+  </div>
 </section>
 
-
-<section class="section" id="partners">
-
-<div class="container">
-
-<h2>PARTNER WITH VETT</h2>
-
-<p style="max-width:600px;color:#aaa;margin-top:15px;">
-Advocates, vehicle inspectors, civil engineers and verification professionals
-can join the Vett network and earn by providing trusted inspections.
-</p>
-
-<a class="btn" href="mailto:verify@usevett.com">Become a Partner</a>
-
-</div>
-
+<!-- NRI -->
+<section class="sec nri-sec" id="nri">
+  <div class="nri-inner">
+    <div>
+      <div class="eyebrow">For NRIs & Remote Buyers</div>
+      <h2 class="nri-title">BUYING FROM<br><span>ABROAD?</span><br>WE ARE YOUR<br>EYES ON THE GROUND.</h2>
+      <p class="nri-body">You can't fly back to check every property. The broker says it's fine. Vett gives you independent, documented verification — before you transfer a single rupee.</p>
+      <a href="https://wa.me/918089614716" target="_blank" class="btn btn-gold">Request NRI Verification</a>
+    </div>
+    <div class="nri-stats">
+      <div class="nri-stat"><div class="nri-num">Live</div><div class="nri-lbl">Video call during inspection — watch from anywhere</div></div>
+      <div class="nri-stat"><div class="nri-num">48 Hr</div><div class="nri-lbl">Structural report turnaround</div></div>
+      <div class="nri-stat"><div class="nri-num">₹0</div><div class="nri-lbl">Conflict of interest — we earn on verification, not deal closure</div></div>
+      <div class="nri-stat"><div class="nri-num">100%</div><div class="nri-lbl">Independent from seller's broker and lawyer</div></div>
+    </div>
+  </div>
 </section>
 
+<!-- PRICING -->
+<section class="sec sec-navy" id="pricing">
+  <div class="eyebrow">Pricing</div>
+  <h2 class="sec-title">TRANSPARENT.<br>NO SURPRISES.</h2>
+  <p class="sec-sub">On a ₹50L purchase, verification costs less than 1%. Not verifying could cost everything.</p>
+  <div class="ptabs">
+    <button class="ptab active" onclick="switchTab('apt')">🏠 Residential</button>
+    <button class="ptab" onclick="switchTab('land')">🌿 Land & Plot</button>
+  </div>
 
-<section class="section" id="contact">
+  <!-- RESIDENTIAL -->
+  <div class="price-grid" id="plans-apt">
+    <div class="price-card">
+      <div class="price-tier">Structural</div>
+      <div class="price-amt">₹3,999</div>
+      <div class="price-badge">⏱ 48-hour delivery</div>
+      <div class="price-desc">Physical inspection only — no legal. Fast check before you go deeper. <strong style="color:var(--white);">What you receive:</strong> Timestamped photo report, section-by-section findings, risk rating, plain language summary.</div>
+      <ul class="price-feats">
+        <li><span>✓</span> Walls, ceiling, floors, seepage check</li>
+        <li><span>✓</span> Plumbing and electrical tested</li>
+        <li><span>✓</span> Doors, windows, fittings assessed</li>
+        <li><span>✓</span> Building common areas checked</li>
+        <li><span>✓</span> 40–50 timestamped photos</li>
+        <li><span>✓</span> Risk rating: LOW / MODERATE / HIGH</li>
+      </ul>
+      <a href="https://wa.me/918089614716" target="_blank" class="price-btn price-btn-out">Get Started</a>
+    </div>
+    <div class="price-card feat">
+      <div class="price-tier">Standard</div>
+      <div class="price-amt">₹ TBD</div>
+      <div class="price-badge">⏱ 5–7 working days</div>
+      <div class="price-desc">Structural + independent legal review. <strong style="color:var(--white);">What you receive:</strong> Full physical report + advocate's legal findings + integrated verdict + red flag list.</div>
+      <ul class="price-feats">
+        <li><span>✓</span> Everything in Structural</li>
+        <li><span>✓</span> Title deed and encumbrance review</li>
+        <li><span>✓</span> Possession certificate verified</li>
+        <li><span>✓</span> Approvals and NOC check</li>
+        <li><span>✓</span> Video walkthrough</li>
+        <li><span>✓</span> Integrated physical + legal report</li>
+      </ul>
+      <a href="https://wa.me/918089614716" target="_blank" class="price-btn price-btn-gold">Get Started</a>
+    </div>
+    <div class="price-card">
+      <div class="price-tier">Premium</div>
+      <div class="price-amt">₹ TBD</div>
+      <div class="price-badge">⏱ 7–10 days</div>
+      <div class="price-desc">For transactions above ₹50L. <strong style="color:var(--white);">What you receive:</strong> Everything in Standard + 30-year title chain + multi-source legal reports + advocate consultation call.</div>
+      <ul class="price-feats">
+        <li><span>✓</span> Everything in Standard</li>
+        <li><span>✓</span> 30-year title chain review</li>
+        <li><span>✓</span> Reports from multiple legal sources</li>
+        <li><span>✓</span> Neighbourhood risk assessment</li>
+        <li><span>✓</span> Two site visits if needed</li>
+        <li><span>✓</span> 30-min advocate consultation</li>
+      </ul>
+      <a href="https://wa.me/918089614716" target="_blank" class="price-btn price-btn-out">Get Started</a>
+    </div>
+  </div>
 
-<div class="container">
+  <!-- LAND -->
+  <div class="price-grid" id="plans-land" style="display:none;">
+    <div class="price-card">
+      <div class="price-tier">Structural</div>
+      <div class="price-amt">₹3,999</div>
+      <div class="price-badge">⏱ 48-hour delivery</div>
+      <div class="price-desc">Physical site inspection only. <strong style="color:var(--white);">What you receive:</strong> GPS boundary video, timestamped photos, access road assessment, risk rating.</div>
+      <ul class="price-feats">
+        <li><span>✓</span> GPS-verified boundary walk — all 4 sides</li>
+        <li><span>✓</span> Neighbour boundary confirmation</li>
+        <li><span>✓</span> Access road type and condition</li>
+        <li><span>✓</span> Encroachment check</li>
+        <li><span>✓</span> Terrain and drainage assessment</li>
+        <li><span>✓</span> Photo and video evidence</li>
+      </ul>
+      <a href="https://wa.me/918089614716" target="_blank" class="price-btn price-btn-out">Get Started</a>
+    </div>
+    <div class="price-card feat">
+      <div class="price-tier">Standard</div>
+      <div class="price-amt">₹ TBD</div>
+      <div class="price-badge">⏱ 5–7 working days</div>
+      <div class="price-desc">Physical + full legal document review. <strong style="color:var(--white);">What you receive:</strong> Boundary report + advocate's title findings + integrated verdict.</div>
+      <ul class="price-feats">
+        <li><span>✓</span> Everything in Structural</li>
+        <li><span>✓</span> Title deed review</li>
+        <li><span>✓</span> Encumbrance certificate check</li>
+        <li><span>✓</span> Possession certificate verified</li>
+        <li><span>✓</span> Land tax and records check</li>
+        <li><span>✓</span> Integrated physical + legal report</li>
+      </ul>
+      <a href="https://wa.me/918089614716" target="_blank" class="price-btn price-btn-gold">Get Started</a>
+    </div>
+    <div class="price-card">
+      <div class="price-tier">Premium</div>
+      <div class="price-amt">₹ TBD</div>
+      <div class="price-badge">⏱ 7–10 days</div>
+      <div class="price-desc">For high-value land above ₹30L. <strong style="color:var(--white);">What you receive:</strong> Deep legal with court search + multi-source reports + advocate call.</div>
+      <ul class="price-feats">
+        <li><span>✓</span> Everything in Standard</li>
+        <li><span>✓</span> 30-year title chain review</li>
+        <li><span>✓</span> Court and litigation search</li>
+        <li><span>✓</span> Government acquisition check</li>
+        <li><span>✓</span> Reports from multiple legal sources</li>
+        <li><span>✓</span> 30-min advocate consultation</li>
+      </ul>
+      <a href="https://wa.me/918089614716" target="_blank" class="price-btn price-btn-out">Get Started</a>
+    </div>
+  </div>
 
-<h2>CONTACT</h2>
-
-<p style="margin-top:20px;color:#aaa;">
-Phone: +91 80896 14716<br>
-Email: verify@usevett.com<br>
-India — Expanding to more cities.
-</p>
-
-<a class="btn" href="https://wa.me/918089614716">Chat on WhatsApp</a>
-
-</div>
-
+  <div class="addon-bar">
+    <div><div class="addon-title">NRI LIVE INSPECTION ADD-ON — ₹2,000</div><div class="addon-desc">Watch your inspection live from anywhere. Ask questions in real time. Add to any plan.</div></div>
+    <a href="https://wa.me/918089614716" target="_blank" class="btn btn-out" style="white-space:nowrap;flex-shrink:0;">Add to My Plan</a>
+  </div>
+  <div class="tl-note"><span>⏱</span><span><strong>Why does legal take 5–7 days?</strong> We need to fetch documents from registration offices and revenue departments. When issues are found, additional verification is required. We will not rush legal review — your protection depends on thoroughness.</span></div>
 </section>
 
+<!-- WHY VETT -->
+<section class="sec sec-dark" id="why">
+  <div class="eyebrow">Why Vett</div>
+  <h2 class="sec-title">THE NEUTRAL PARTY<br>THAT SHOULD HAVE<br>ALWAYS EXISTED.</h2>
+  <div class="why-grid">
+    <div class="why-pts">
+      <div class="why-pt"><div class="why-num">01</div><div><div class="why-title">Paid for truth. Not for closing.</div><div class="why-body">Brokers earn when deals close. We earn when we verify — regardless of outcome. Our incentive is always the truth.</div></div></div>
+      <div class="why-pt"><div class="why-num">02</div><div><div class="why-title">Sector-trained professionals. Not generalists.</div><div class="why-body">Vett connects you with trained experts in their specific field — structural, legal, mechanical, technical. Right specialist. Zero hassle.</div></div></div>
+      <div class="why-pt"><div class="why-num">03</div><div><div class="why-title">Inspectors cannot be bribed. System-enforced.</div><div class="why-body">Every inspection is cross-checked internally before delivery. No single expert can alter their own findings. The system flags discrepancies automatically.</div></div></div>
+      <div class="why-pt"><div class="why-num">04</div><div><div class="why-title">Physical + legal. One report. Plain language.</div><div class="why-body">Structural findings and legal review in one integrated document. Written so your family can read it — not so it sounds impressive in a filing.</div></div></div>
+    </div>
+    <div>
+      <table class="cmp-table">
+        <thead><tr><th>What you need</th><th>Broker</th><th>Portal</th><th>VETT</th></tr></thead>
+        <tbody>
+          <tr><td>Paid for truth</td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="yes">✓</span></td></tr>
+          <tr><td>No conflict of interest</td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="yes">✓</span></td></tr>
+          <tr><td>Physical + legal combined</td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="yes">✓</span></td></tr>
+          <tr><td>Anti-bribery verification</td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="yes">✓</span></td></tr>
+          <tr><td>NRI live inspection</td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="yes">✓</span></td></tr>
+          <tr><td>Plain language verdict</td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="yes">✓</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
 
+<!-- FAQ -->
+<section class="sec sec-navy" id="faq">
+  <div class="eyebrow">FAQ</div>
+  <h2 class="sec-title">COMMON QUESTIONS.</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>How long does verification take?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p><strong>Structural plan:</strong> Site visit within 24 hours, report delivered in 48 hours.</p><p><strong>Standard and Premium:</strong> Include legal review — 5–7 working days. Complex cases may take longer. You'll be updated throughout.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>Can inspectors be bribed to give a good report?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>No. Every Vett inspection goes through mandatory internal cross-verification before the report is released. No single inspector can approve or change their own findings — a separate reviewer checks the evidence independently.</p><p>If findings don't match the evidence submitted, the report is flagged and re-investigated. The only path to a clean report is a clean property.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>Is the Vett report legal advice?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>No. Vett reports document professional observations and opinions at the time of inspection. They are not legal advice and do not replace your own independent lawyer. Our purpose is to protect you <strong>before</strong> you pay — not to fight a case afterwards.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>How do I pay?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Payment is collected upfront via UPI, bank transfer, or any major payment method. You receive confirmation immediately. We collect upfront because our expert team is committed regardless of findings — which is exactly what keeps our reports independent.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span>What if serious issues are found? Do I get a refund?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>No refund — and that's intentional. If we refunded when issues were found, we'd have an incentive to find fewer. Our fee is fixed regardless of outcome.</p><p>A HIGH risk rating may have just saved you from a ₹40 lakh mistake. That's the service working exactly as designed.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT + CTA -->
+<section class="cta-sec" id="contact">
+  <div class="cta-glow"></div>
+  <h2 class="cta-title">DON'T PAY BEFORE<br>YOU <span>VERIFY.</span></h2>
+  <p class="cta-sub">Reach out via WhatsApp or email. We respond within 2 hours.</p>
+  <div class="cta-btns">
+    <a href="https://wa.me/918089614716" target="_blank" class="btn btn-gold">WhatsApp Us</a>
+    <a href="mailto:verify@usevett.com" class="btn btn-out">Email Us</a>
+  </div>
+  <div class="cta-contacts">
+    <div class="cta-contact">📞 <a href="tel:+918089614716">+91 80896 14716</a></div>
+    <div class="cta-contact">✉️ <a href="mailto:verify@usevett.com">verify@usevett.com</a></div>
+    <div class="cta-contact">📍 Trivandrum · <span style="color:var(--gold);">Expanding to more cities soon</span></div>
+  </div>
+</section>
+
+</div><!-- end home -->
+
+<!-- ═══════════════════════════════════════ PROPERTY PAGE ═══════════════════════════════════════ -->
+<div id="pg-property" class="page-section">
+
+<section class="sec sec-dark page-hero-inner">
+  <div class="eyebrow">Property Verification</div>
+  <h1 class="sec-title" style="font-size:clamp(44px,7vw,84px);">KNOW EXACTLY<br>WHAT YOU'RE<br><span style="color:var(--gold);">BUYING.</span></h1>
+  <p class="sec-sub" style="margin-bottom:24px;">Independent structural and legal verification before you pay. No conflict of interest. Just the truth.</p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px;">
+    <a href="https://wa.me/918089614716" target="_blank" class="btn btn-gold">Request Verification</a>
+    <a href="#" onclick="showPage('home');scrollTo('pricing')" class="btn btn-out">View Pricing</a>
+  </div>
+  <div class="tab-btns">
+    <button class="tab-btn active" onclick="switchPropTab('residential')">🏠 Residential & Apartments</button>
+    <button class="tab-btn" onclick="switchPropTab('land')">🌿 Land & Plot</button>
+  </div>
+</section>
+
+<!-- RESIDENTIAL CHECKS -->
+<div id="tab-residential">
+<section class="sec sec-navy">
+  <div class="eyebrow">Residential & Apartments</div>
+  <h2 class="sec-title">WHAT WE CHECK.</h2>
+  <p class="sec-sub">Apartments, independent houses, villas. Physical inspection + independent legal review.</p>
+  <div class="chk-grid">
+    <div class="chk-card"><h4>🏗️ Structural</h4><ul class="chk-list"><li>Walls — cracks, damp, masking</li><li>Ceiling — sag, stains, seepage</li><li>Floors — sinking, water damage</li><li>Overall build quality</li></ul></div>
+    <div class="chk-card"><h4>🔧 Plumbing & Electrical</h4><ul class="chk-list"><li>Water pressure and clarity</li><li>Drain speed — all outlets</li><li>Outlet testing — live power</li><li>Electrical panel and wiring</li><li>Hidden leak detection</li></ul></div>
+    <div class="chk-card"><h4>🚪 Fittings & Fixtures</h4><ul class="chk-list"><li>All doors — open, close, lock</li><li>All windows — seal, lock, glass</li><li>Kitchen cabinets and wardrobes</li><li>Balcony railing stability</li></ul></div>
+    <div class="chk-card"><h4>🏢 Building & Environment</h4><ul class="chk-list"><li>Lobby, lift, stairwell condition</li><li>Parking and security</li><li>Natural light and ventilation</li><li>Odour, mould, pest check</li></ul></div>
+    <div class="chk-card"><h4>📄 Legal Documents</h4><ul class="chk-list"><li>Title deed and ownership chain</li><li>Encumbrance certificate</li><li>Building approvals and NOCs</li><li>Possession certificate</li></ul></div>
+    <div class="chk-card"><h4>📸 Evidence</h4><ul class="chk-list"><li>40–50+ timestamped photos</li><li>Video walkthrough</li><li>GPS location stamp</li><li>Document photos for legal review</li></ul></div>
+  </div>
+</section>
+</div>
+
+<!-- LAND CHECKS -->
+<div id="tab-land" style="display:none;">
+<section class="sec sec-navy" id="land-sec">
+  <div class="eyebrow">Land & Plot</div>
+  <h2 class="sec-title">BEFORE YOU BUY<br>LAND — VERIFY IT.</h2>
+  <p class="sec-sub">Boundary walk, access road, physical condition, and legal title — all independently checked.</p>
+  <div class="chk-grid">
+    <div class="chk-card"><h4>📍 Boundary</h4><ul class="chk-list"><li>GPS boundary walk — all 4 sides</li><li>Neighbour confirmation per boundary</li><li>Boundary markers checked</li><li>Encroachment documented</li><li>Mandatory perimeter video</li></ul></div>
+    <div class="chk-card"><h4>🛣️ Access & Road</h4><ul class="chk-list"><li>Road type — public/panchayat/private</li><li>Vehicle accessibility confirmed</li><li>Access dispute check</li><li>Video from road to entrance</li></ul></div>
+    <div class="chk-card"><h4>🌿 Physical Condition</h4><ul class="chk-list"><li>Terrain type and slope</li><li>Waterlogging and drainage</li><li>Water body proximity</li><li>Natural vs filled land</li><li>Existing structures</li></ul></div>
+    <div class="chk-card"><h4>📄 Legal Documents</h4><ul class="chk-list"><li>Title deed and ownership chain</li><li>Encumbrance certificate</li><li>Possession certificate</li><li>Land tax and records</li><li>Location map and survey</li></ul></div>
+  </div>
+</section>
+</div>
+
+<!-- WHAT YOU RECEIVE -->
+<section class="sec sec-dark">
+  <div class="eyebrow">What You Receive</div>
+  <h2 class="sec-title">YOUR REPORT.</h2>
+  <p class="sec-sub">One document. Everything you need to decide.</p>
+  <div class="what-you-get">
+    <div class="wyg"><div class="wyg-icon">🔴🟡🟢</div><div class="wyg-title">Traffic Light Risk Rating</div><div class="wyg-body">LOW / MODERATE / HIGH — instant read on whether to proceed, pause, or walk away.</div></div>
+    <div class="wyg"><div class="wyg-icon">📸</div><div class="wyg-title">Photo & Video Evidence</div><div class="wyg-body">Timestamped, GPS-tagged visuals for every section. You see exactly what the inspector saw.</div></div>
+    <div class="wyg"><div class="wyg-icon">⚖️</div><div class="wyg-title">Legal Review Summary</div><div class="wyg-body">Independent advocate findings on title, encumbrance, approvals, and document red flags.</div></div>
+    <div class="wyg"><div class="wyg-icon">📋</div><div class="wyg-title">Plain Language Verdict</div><div class="wyg-body">A clear summary your family can read and understand — not legal jargon.</div></div>
+    <div class="wyg"><div class="wyg-icon">🔒</div><div class="wyg-title">Cross-Verified</div><div class="wyg-body">Every report reviewed by Vett's internal team before delivery. Inspectors cannot alter findings.</div></div>
+    <div class="wyg"><div class="wyg-icon">🚩</div><div class="wyg-title">Red Flag List</div><div class="wyg-body">Every issue found — physical or legal — listed with severity and recommended next step.</div></div>
+  </div>
+  <div style="margin-top:36px;text-align:center;">
+    <a href="https://wa.me/918089614716" target="_blank" class="btn btn-gold">Request a Property Verification</a>
+  </div>
+</section>
+
+</div><!-- end property -->
+
+<!-- ═══════════════════════════════════════ PARTNERS PAGE ═══════════════════════════════════════ -->
+<div id="pg-partners" class="page-section">
+
+<section class="sec sec-dark page-hero-inner">
+  <div class="eyebrow">Partner With Vett</div>
+  <h1 class="sec-title" style="font-size:clamp(42px,7vw,80px);">EARN REVENUE.<br>BUILD YOUR<br><span style="color:var(--gold);">REPUTATION.</span></h1>
+  <p class="sec-sub" style="margin-bottom:28px;">Vett connects buyers with trusted professionals across structural, legal, mechanical, and technical fields. You bring the expertise — we bring the work.</p>
+  <a href="#apply" class="btn btn-gold">Apply to Partner</a>
+</section>
+
+<section class="sec sec-navy">
+  <div class="eyebrow">Who We're Looking For</div>
+  <h2 class="sec-title">YOUR EXPERTISE.<br>OUR PLATFORM.</h2>
+  <div class="partner-grid">
+    <div class="partner-card">
+      <div class="partner-icon">⚖️</div>
+      <div class="partner-name">ADVOCATES & LEGAL FIRMS</div>
+      <div class="partner-tag">Property law · Title verification · Document review</div>
+      <div class="partner-desc">Review title deeds, encumbrance certificates, and legal clearances as part of Vett's Standard and Premium property packages.</div>
+      <ul class="partner-perks">
+        <li>Fixed fee per legal review — paid promptly</li>
+        <li>Steady inbound work, no client acquisition needed</li>
+        <li>Work on your own schedule</li>
+        <li>Build profile as a Vett-empanelled advocate</li>
+      </ul>
+    </div>
+    <div class="partner-card">
+      <div class="partner-icon">🏗️</div>
+      <div class="partner-name">CONSTRUCTION & INSPECTION FIRMS</div>
+      <div class="partner-tag">Structural inspection · Civil engineering · Site assessment</div>
+      <div class="partner-desc">Conduct on-site structural inspections using Vett's standardised checklist. Your firm's engineers become Vett's field team in your city.</div>
+      <ul class="partner-perks">
+        <li>Revenue per inspection — no overhead increase</li>
+        <li>Checklist and report framework provided</li>
+        <li>Secondary revenue stream for your existing firm</li>
+        <li>Brand visibility with every Vett report</li>
+      </ul>
+    </div>
+    <div class="partner-card">
+      <div class="partner-icon">🔧</div>
+      <div class="partner-name">MECHANICAL & VEHICLE INSPECTORS</div>
+      <div class="partner-tag">Used cars · Bikes · Commercial vehicles</div>
+      <div class="partner-desc">Inspect used vehicles before sale — engine, accident history, odometer, ownership documents. Building this network ahead of launch.</div>
+      <ul class="partner-perks">
+        <li>Early partner advantage — preferred placement</li>
+        <li>Revenue per vehicle inspection</li>
+        <li>Vett training and standardisation provided</li>
+        <li>Work with our buyer base from day one</li>
+      </ul>
+    </div>
+    <div class="partner-card">
+      <div class="partner-icon">📱</div>
+      <div class="partner-name">TECH & DEVICE INSPECTION SHOPS</div>
+      <div class="partner-tag">Phones · Laptops · Electronics</div>
+      <div class="partner-desc">Your repair shop becomes a Vett gadget verification point. We send buyers to you — you inspect and submit findings.</div>
+      <ul class="partner-perks">
+        <li>Additional revenue per device check</li>
+        <li>No new customers to acquire — Vett sends them</li>
+        <li>Standardised 20-minute check protocol</li>
+        <li>Vett Verified badge for your shop</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-dark">
+  <div class="eyebrow">How It Works for Partners</div>
+  <h2 class="sec-title">SIMPLE TO JOIN.<br>EASY TO EARN.</h2>
+  <div class="steps">
+    <div class="step"><div class="step-bar"></div><div class="step-num">01</div><div class="step-title">Apply & Get Verified</div><div class="step-body">Submit your credentials. Vett reviews and onboards qualified partners. Your identity stays confidential to end buyers.</div></div>
+    <div class="step"><div class="step-bar"></div><div class="step-num">02</div><div class="step-title">Receive Assignments</div><div class="step-body">When a buyer requests verification in your area, Vett assigns the case. You accept, we coordinate everything else.</div></div>
+    <div class="step"><div class="step-bar"></div><div class="step-num">03</div><div class="step-title">Verify & Submit</div><div class="step-body">Use Vett's checklist on your phone. Submit findings and photos. Our internal team cross-checks before the buyer receives the report.</div></div>
+    <div class="step"><div class="step-bar"></div><div class="step-num">04</div><div class="step-title">Get Paid</div><div class="step-body">Fixed fee per completed verification, paid promptly. Higher-quality ratings unlock higher-value assignments over time.</div></div>
+  </div>
+  <div class="trust-bar">
+    <div class="trust-bar-icon">🔒</div>
+    <div class="trust-bar-txt"><strong>Quality Control:</strong> All submissions go through Vett's internal review before delivery. This protects your professional reputation and keeps the platform trustworthy. Consistent partners get priority assignments.</div>
+  </div>
+</section>
+
+<!-- APPLY -->
+<section class="sec sec-navy" id="apply">
+  <div class="eyebrow">Apply to Partner</div>
+  <h2 class="sec-title">LET'S TALK.</h2>
+  <p class="sec-sub">Fill in your details and we'll respond within 48 hours. Or WhatsApp us directly.</p>
+  <div class="partner-form">
+    <div class="form-row">
+      <div class="form-grp"><label>Your Name</label><input type="text" placeholder="Full name"></div>
+      <div class="form-grp"><label>Phone / WhatsApp</label><input type="tel" placeholder="+91 XXXXX XXXXX"></div>
+    </div>
+    <div class="form-grp"><label>Email</label><input type="email" placeholder="you@yourfirm.com"></div>
+    <div class="form-row">
+      <div class="form-grp"><label>Partner Type</label>
+        <select><option value="" disabled selected>Select category</option><option>Advocate / Legal Firm</option><option>Construction / Inspection Firm</option><option>Mechanical / Vehicle Inspector</option><option>Tech / Device Inspection Shop</option><option>Other</option></select>
+      </div>
+      <div class="form-grp"><label>City</label><input type="text" placeholder="City you operate in"></div>
+    </div>
+    <div class="form-grp"><label>Your Experience</label><textarea placeholder="Brief description of your expertise, years of experience, and why you'd like to partner with Vett..."></textarea></div>
+    <a href="https://wa.me/918089614716?text=Hi%2C%20I'd%20like%20to%20partner%20with%20Vett." target="_blank" class="btn btn-gold" style="margin-top:4px;">Submit via WhatsApp</a>
+    <p class="form-note">We'll review and respond within 48 hours. All partner information is kept strictly confidential.</p>
+  </div>
+</section>
+
+</div><!-- end partners -->
+
+<!-- ═══════════════════════════════ SHARED FOOTER (always visible) ═══════════════════════════════ -->
+<div class="coming-strip">
+  <span class="cs-lbl">COMING SOON</span>
+  <span>🚗 Used Vehicle Verification</span><span class="cs-dot">◆</span>
+  <span>📱 Gadget Verification</span><span class="cs-dot">◆</span>
+  <span style="color:var(--gold);">One platform. Every high-value purchase.</span>
+</div>
+<div class="disclaimer">
+  <p><strong>Important:</strong> Vett is an independent verification and opinion platform. All reports represent professional observations at the time of inspection based on information available during verification. Reports are not legal advice, structural guarantees, or valuations, and do not constitute a warranty of any kind. Buyers should engage their own independent legal counsel before completing any transaction. Vett connects buyers with a curated network of independent professionals — individual identities are not disclosed. Vett's liability is limited to the fee paid for the specific verification.</p>
+</div>
 <footer>
-
-VETT · Verify Before You Pay · India
-
+  <div class="ft-inner">
+    <div><a href="#" onclick="showPage('home')" class="ft-logo">VETT</a><div class="ft-tag">Verify before you pay.</div></div>
+    <div class="ft-col"><h4>Services</h4><ul><li><a href="#" onclick="showPage('property')">Residential Property</a></li><li><a href="#" onclick="showPage('property');scrollTo('land-sec')">Land & Plot</a></li><li><a href="#">Vehicles (Soon)</a></li><li><a href="#">Gadgets (Soon)</a></li></ul></div>
+    <div class="ft-col"><h4>Company</h4><ul><li><a href="#" onclick="showPage('home');scrollTo('how')">How It Works</a></li><li><a href="#" onclick="showPage('home');scrollTo('faq')">FAQ</a></li><li><a href="#" onclick="showPage('home');scrollTo('nri')">For NRIs</a></li><li><a href="#" onclick="showPage('partners')">Partner With Us</a></li></ul></div>
+    <div class="ft-col"><h4>Contact</h4><ul><li><a href="https://wa.me/918089614716" target="_blank">+91 80896 14716</a></li><li><a href="mailto:verify@usevett.com">verify@usevett.com</a></li><li><a>Trivandrum, India</a></li><li><a style="color:var(--gold);">Expanding to more cities soon</a></li></ul></div>
+  </div>
+  <div class="ft-bottom"><div class="ft-copy">© 2025 Vett Technologies. All rights reserved.</div><div class="ft-domain">usevett.com</div></div>
 </footer>
 
+<script>
+// PAGE SWITCHING
+function showPage(name) {
+  document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+  document.getElementById('pg-' + name).classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// SCROLL TO SECTION
+function scrollTo(id) {
+  setTimeout(() => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+  }, 100);
+}
+
+// MOBILE NAV
+function toggleMob() {
+  document.getElementById('mobnav').classList.toggle('open');
+}
+
+// PRICING TABS
+function switchTab(type) {
+  const apt = document.getElementById('plans-apt');
+  const land = document.getElementById('plans-land');
+  apt.style.display = type === 'apt' ? 'grid' : 'none';
+  land.style.display = type === 'land' ? 'grid' : 'none';
+  document.querySelectorAll('.ptab').forEach((b, i) => {
+    b.classList.toggle('active', (i === 0 && type === 'apt') || (i === 1 && type === 'land'));
+  });
+}
+
+// PROPERTY SUB-TABS
+function switchPropTab(type) {
+  document.getElementById('tab-residential').style.display = type === 'residential' ? 'block' : 'none';
+  document.getElementById('tab-land').style.display = type === 'land' ? 'block' : 'none';
+  document.querySelectorAll('.tab-btn').forEach((b, i) => {
+    b.classList.toggle('active', (i === 0 && type === 'residential') || (i === 1 && type === 'land'));
+  });
+}
+
+// FAQ
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const open = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!open) item.classList.add('open');
+}
+</script>
 </body>
 </html>
