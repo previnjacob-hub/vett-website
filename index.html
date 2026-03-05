@@ -1,81 +1,91 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>UseVett | Verify Before You Pay</title>
+<title>VETT | Verify Before You Pay</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
+:root{
+--gold:#d4a11e;
+--dark:#0b0b12;
+--card:#161622;
+--border:#2c2c3a;
 }
 
+*{margin:0;padding:0;box-sizing:border-box;}
+
 body{
+font-family:Inter;
 background:#0b0b12;
 color:white;
-font-family:Inter;
-line-height:1.6;
+
+background-image:
+linear-gradient(rgba(212,161,30,0.05) 1px, transparent 1px),
+linear-gradient(90deg, rgba(212,161,30,0.05) 1px, transparent 1px);
+background-size:60px 60px;
 }
 
 .container{
 width:90%;
-max-width:1100px;
+max-width:1150px;
 margin:auto;
 }
-
-/* NAV */
 
 nav{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:25px 0;
+padding:28px 0;
 }
 
 .logo{
 font-family:"Bebas Neue";
 font-size:34px;
 letter-spacing:4px;
-color:#d4a11e;
+color:var(--gold);
 }
 
 nav a{
 color:#bbb;
 text-decoration:none;
-margin-left:25px;
+margin-left:26px;
 font-size:14px;
 }
 
-nav a:hover{
-color:#d4a11e;
-}
-
-/* HERO */
+nav a:hover{color:var(--gold);}
 
 .hero{
-padding:120px 0 90px;
+padding:120px 0 80px;
+position:relative;
+}
+
+.hero-glow{
+position:absolute;
+width:600px;
+height:600px;
+background:radial-gradient(circle, rgba(212,161,30,0.15) 0%, transparent 70%);
+top:-200px;
+right:-200px;
+pointer-events:none;
 }
 
 .hero h1{
 font-family:"Bebas Neue";
-font-size:95px;
+font-size:100px;
 line-height:0.9;
 letter-spacing:2px;
 }
 
-.gold{
-color:#d4a11e;
-}
+.gold{color:var(--gold);}
 
 .hero p{
 margin-top:20px;
-max-width:520px;
+max-width:500px;
 color:#aaa;
 font-size:18px;
 }
@@ -83,19 +93,12 @@ font-size:18px;
 .btn{
 display:inline-block;
 margin-top:35px;
-padding:16px 34px;
-background:#d4a11e;
+padding:16px 36px;
+background:var(--gold);
 color:black;
 font-weight:600;
 text-decoration:none;
-transition:0.3s;
 }
-
-.btn:hover{
-transform:translateY(-2px);
-}
-
-/* SECTION */
 
 .section{
 padding:90px 0;
@@ -103,47 +106,66 @@ padding:90px 0;
 
 .section h2{
 font-family:"Bebas Neue";
-font-size:60px;
+font-size:64px;
 letter-spacing:2px;
-margin-bottom:10px;
+margin-bottom:15px;
 }
-
-/* GRID */
 
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:30px;
 margin-top:40px;
 }
 
-/* CARD */
-
 .card{
-background:#161622;
-padding:30px;
-border:1px solid #2c2c3a;
-transition:0.3s;
+background:var(--card);
+padding:32px;
+border:1px solid var(--border);
+transition:.3s;
 }
 
 .card:hover{
 transform:translateY(-6px);
-border-color:#d4a11e;
+border-color:var(--gold);
+box-shadow:0 15px 40px rgba(212,161,30,0.15);
 }
 
 .card h3{
 font-family:"Bebas Neue";
-font-size:28px;
+font-size:30px;
 letter-spacing:1px;
 }
 
 .card p{
+margin-top:10px;
 color:#aaa;
 font-size:14px;
-margin-top:10px;
 }
 
-/* STEPS */
+.ticker{
+background:var(--gold);
+color:black;
+padding:12px 0;
+overflow:hidden;
+white-space:nowrap;
+}
+
+.ticker-track{
+display:inline-block;
+animation:scroll 20s linear infinite;
+}
+
+.ticker span{
+font-family:"Bebas Neue";
+letter-spacing:3px;
+margin:0 40px;
+}
+
+@keyframes scroll{
+0%{transform:translateX(0)}
+100%{transform:translateX(-50%)}
+}
 
 .steps{
 display:grid;
@@ -155,66 +177,40 @@ margin-top:40px;
 .step{
 background:#141420;
 padding:25px;
-border-left:3px solid #d4a11e;
+border-left:3px solid var(--gold);
 }
 
-.step h4{
-margin-bottom:8px;
+.step h4{margin-bottom:8px;}
+
+table{
+width:100%;
+margin-top:40px;
+border-collapse:collapse;
 }
 
-/* PARTNER */
-
-.partner{
-text-align:center;
-padding:100px 20px;
-background:#12121c;
-}
-
-.partner h2{
-font-family:"Bebas Neue";
-font-size:60px;
-}
-
-.partner p{
-max-width:600px;
-margin:auto;
-margin-top:10px;
-color:#aaa;
-}
-
-/* CONTACT */
-
-.contact{
+th,td{
+border-bottom:1px solid #2c2c3a;
+padding:15px;
 text-align:center;
 }
 
-.contact p{
-margin-top:20px;
-color:#aaa;
-}
+th:first-child,td:first-child{text-align:left;}
 
-/* FOOTER */
+.check{color:#4bd37b;font-weight:bold;}
+.cross{color:#ff6a6a;}
 
 footer{
 border-top:1px solid #2c2c3a;
 padding:40px 0;
-margin-top:80px;
 text-align:center;
+margin-top:80px;
 color:#777;
-font-size:14px;
 }
-
-/* MOBILE */
 
 @media(max-width:768px){
 
-.hero h1{
-font-size:60px;
-}
-
-.section h2{
-font-size:42px;
-}
+.hero h1{font-size:64px;}
+.section h2{font-size:44px;}
 
 }
 
@@ -226,20 +222,18 @@ font-size:42px;
 <div class="container">
 
 <nav>
-
 <div class="logo">VETT</div>
-
 <div>
 <a href="#services">Services</a>
-<a href="#how">How it works</a>
-<a href="#partner">Partner</a>
+<a href="#how">How It Works</a>
+<a href="#partners">Partner</a>
 <a href="#contact">Contact</a>
 </div>
-
 </nav>
 
-
 <section class="hero">
+
+<div class="hero-glow"></div>
 
 <h1>
 VERIFY<br>
@@ -248,60 +242,32 @@ YOU PAY
 </h1>
 
 <p>
-Independent verification for property, vehicles and high-value purchases across India.
+Independent verification platform for property and vehicles across India.
+Know the truth before committing to a high-value purchase.
 </p>
 
-<a class="btn" href="https://wa.me/918089614716">
-Request Verification
-</a>
+<a class="btn" href="https://wa.me/918089614716">Request Verification</a>
 
 </section>
 
 </div>
 
 
-<section class="section">
+<div class="ticker">
+<div class="ticker-track">
+<span>PROPERTY VERIFICATION</span>
+<span>INDEPENDENT EXPERTS</span>
+<span>VERIFY BEFORE YOU PAY</span>
+<span>USED VEHICLE CHECKS</span>
+<span>TRUSTED REPORTS</span>
 
-<div class="container">
-
-<h2>THE TRUST GAP</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>Property</h3>
-<p>
-Title disputes, encroachments, missing approvals and hidden structural issues.
-Verify before buying.
-</p>
+<span>PROPERTY VERIFICATION</span>
+<span>INDEPENDENT EXPERTS</span>
+<span>VERIFY BEFORE YOU PAY</span>
+<span>USED VEHICLE CHECKS</span>
+<span>TRUSTED REPORTS</span>
 </div>
-
-<div class="card">
-<h3>Used Vehicles</h3>
-<p>
-Mechanical condition, accident history and ownership verification.
-</p>
 </div>
-
-<div class="card">
-<h3>Gadgets</h3>
-<p>
-Battery health, device locks, hidden damage and condition verification.
-</p>
-</div>
-
-<div class="card">
-<h3>Construction</h3>
-<p>
-Quality checks for homes under construction or renovation projects.
-</p>
-</div>
-
-</div>
-
-</div>
-
-</section>
 
 
 <section class="section" id="services">
@@ -313,30 +279,16 @@ Quality checks for homes under construction or renovation projects.
 <div class="grid">
 
 <div class="card">
-<h3>Apartments</h3>
+<h3>Property Verification</h3>
 <p>
-Structural inspection, fittings, plumbing and legal document review.
+Apartments, independent houses, land and under-construction homes verified through structural inspection and legal document review.
 </p>
 </div>
 
 <div class="card">
-<h3>Independent Houses</h3>
+<h3>Vehicle Verification</h3>
 <p>
-Full inspection for villas and standalone homes including legal checks.
-</p>
-</div>
-
-<div class="card">
-<h3>Land & Plots</h3>
-<p>
-Boundary checks, encroachments and ownership verification.
-</p>
-</div>
-
-<div class="card">
-<h3>Used Cars</h3>
-<p>
-Mechanical inspection and ownership verification before purchase.
+Independent used vehicle inspection covering engine condition, accident history and ownership verification. Launching soon in select cities.
 </p>
 </div>
 
@@ -351,28 +303,28 @@ Mechanical inspection and ownership verification before purchase.
 
 <div class="container">
 
-<h2>HOW IT WORKS</h2>
+<h2>HOW VETT WORKS</h2>
 
 <div class="steps">
 
 <div class="step">
-<h4>1. Request</h4>
-<p>Share property, vehicle or item details.</p>
+<h4>1 Request Verification</h4>
+<p>Share property or vehicle details with Vett.</p>
 </div>
 
 <div class="step">
-<h4>2. Expert Assigned</h4>
-<p>Vett assigns an independent professional.</p>
+<h4>2 Expert Assigned</h4>
+<p>An independent professional is assigned.</p>
 </div>
 
 <div class="step">
-<h4>3. Inspection</h4>
+<h4>3 Inspection</h4>
 <p>On-site inspection and document review.</p>
 </div>
 
 <div class="step">
-<h4>4. Report</h4>
-<p>You receive a verified report before deciding.</p>
+<h4>4 Verified Report</h4>
+<p>Receive a clear report before making a decision.</p>
 </div>
 
 </div>
@@ -382,34 +334,87 @@ Mechanical inspection and ownership verification before purchase.
 </section>
 
 
-<section class="partner" id="partner">
+<section class="section">
+
+<div class="container">
+
+<h2>WHY VETT</h2>
+
+<table>
+
+<tr>
+<th>Feature</th>
+<th>Broker</th>
+<th>Portal</th>
+<th>VETT</th>
+</tr>
+
+<tr>
+<td>Independent inspection</td>
+<td class="cross">✕</td>
+<td class="cross">✕</td>
+<td class="check">✓</td>
+</tr>
+
+<tr>
+<td>Paid for truth</td>
+<td class="cross">✕</td>
+<td class="cross">✕</td>
+<td class="check">✓</td>
+</tr>
+
+<tr>
+<td>Evidence report</td>
+<td class="cross">✕</td>
+<td class="cross">✕</td>
+<td class="check">✓</td>
+</tr>
+
+<tr>
+<td>No conflict of interest</td>
+<td class="cross">✕</td>
+<td class="cross">✕</td>
+<td class="check">✓</td>
+</tr>
+
+</table>
+
+</div>
+
+</section>
+
+
+<section class="section" id="partners">
+
+<div class="container">
 
 <h2>PARTNER WITH VETT</h2>
 
-<p>
-Advocates, vehicle inspectors, engineers and verification professionals can join the Vett network and earn by providing trusted inspections.
+<p style="max-width:600px;color:#aaa;margin-top:15px;">
+Advocates, vehicle inspectors, civil engineers and verification professionals
+can join the Vett network and earn by providing trusted inspections.
 </p>
 
 <a class="btn" href="mailto:verify@usevett.com">Become a Partner</a>
 
+</div>
+
 </section>
 
 
-<section class="section contact" id="contact">
+<section class="section" id="contact">
 
 <div class="container">
 
 <h2>CONTACT</h2>
 
-<p>
+<p style="margin-top:20px;color:#aaa;">
 Phone: +91 80896 14716<br>
 Email: verify@usevett.com<br>
-India — expanding to more cities.
+India — Expanding to more cities.
 </p>
 
-<a class="btn" href="https://wa.me/918089614716">
-Chat on WhatsApp
-</a>
+<a class="btn" href="https://wa.me/918089614716">Chat on WhatsApp</a>
 
 </div>
 
@@ -418,10 +423,9 @@ Chat on WhatsApp
 
 <footer>
 
-UseVett · Verify Before You Pay · India
+VETT · Verify Before You Pay · India
 
 </footer>
-
 
 </body>
 </html>
